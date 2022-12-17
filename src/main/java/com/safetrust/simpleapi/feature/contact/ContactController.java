@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class ContactController extends BaseRestController {
 
     @PostMapping
     public ResponseEntity<?> createOne(HttpServletRequest request,
-                                       final @RequestBody ContactDTO resource) {
+                                       final @Valid @RequestBody ContactDTO resource) {
         return ResponseEntity.ok(service.createOneDTO(resource));
     }
 
