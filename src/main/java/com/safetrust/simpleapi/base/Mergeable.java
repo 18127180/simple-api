@@ -3,6 +3,7 @@ package com.safetrust.simpleapi.base;
 import org.modelmapper.ModelMapper;
 
 import static com.safetrust.simpleapi.base.MergeFunctions.mergeBase;
+import static com.safetrust.simpleapi.base.MergeFunctions.mergeBaseWithIgnoreNullCondition;
 
 public interface Mergeable<A> {
 
@@ -17,6 +18,11 @@ public interface Mergeable<A> {
 
     default A to(A entity, EntityResolver resolver, ModelMapper modelMapper) {
         mergeBase(this, entity, modelMapper);
+        return entity;
+    }
+
+    default A to(A entity, EntityResolver resolver, ModelMapper modelMapper, boolean ignoreNullValue) {
+        mergeBaseWithIgnoreNullCondition(this, entity, modelMapper, ignoreNullValue);
         return entity;
     }
 

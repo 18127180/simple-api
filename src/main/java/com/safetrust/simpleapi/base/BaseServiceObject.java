@@ -3,12 +3,15 @@ package com.safetrust.simpleapi.base;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.Optional;
 
 import static com.safetrust.simpleapi.util.IdConverter.toId;
+import static java.util.stream.Collectors.toList;
 
 @Log4j2
 @Getter
@@ -138,9 +141,7 @@ public abstract class BaseServiceObject<T extends BaseModel, D extends BaseDTO, 
 
         resource.setId("");                     // Create entity should not match any ID if any
 
-        // resource.setTimeCreated(---);        // TODO: get the current time of Compny timezone
-
-        // Use model mapper to initially Map the data to entity calss
+        // Use model mapper to initially Map the data to entity class
         T entity = (T) modelMapper.map(resource, getPrimaryModelClass());
 
         // call external -> entity mapper to further update  the entity data manually
@@ -164,51 +165,44 @@ public abstract class BaseServiceObject<T extends BaseModel, D extends BaseDTO, 
         //will check if item exists
         T entity = this.getOne(longId);
 
-
         resource.setId(Long.toString(longId));
 
-        // resource.setTimeCreated(---);        // TODO: get the current time of Compny timezone
-
-        entity = (T) ((D) resource).to(entity, resolver, modelMapper);
+        entity = (T) ((D) resource).to(entity, resolver, modelMapper, true);
 
         entity = (T) (getRepository()).save(entity);
 
         return entity;
     }
 
-//    /**
-//     * default findall by name search query use for get all default CRUD implementation
-//     *
-//     * @param sbuId
-//     * @param search
-//     * @param isActive
-//     * @param page
-//     * @param dtoType
-//     * @return
-//     */
-//    public SearchDTO findAllByName(long sbuId, String search, boolean isActive, Pageable page, String dtoType) {
-//        Class<?> finalDtoClass = getDTOClassType(dtoType);
-//        return findAllByName(sbuId, search, isActive, page, finalDtoClass);
-//    }
+    /**
+     * default findall by name search query use for get all default CRUD implementation
+     *
+     * @param search
+     * @param page
+     * @param dtoType
+     * @return
+     */
+    public SearchDTO findAllByName( String search, Pageable page, String dtoType) {
+        Class<?> finalDtoClass = getDTOClassType(dtoType);
+        return findAllByName(search, page, finalDtoClass);
+    }
 
     /**
      * default findall by name search query use for get all default CRUD implementation
      *
-     * @param sbuId
      * @param search   search term by default search the name field
-     * @param isActive show only actiive or deleted data
      * @param page
      * @param cls      actual Class to be use for dTO mapping (xxxDTO, xxxDTOMin, xxxDTOName)
      * @return
      */
-//    public SearchDTO findAllByName(long sbuId, String search, boolean isActive, Pageable page, Class<?> cls) {
-//        Page<T> pages = (Page<T>) ((R) getRepository()).findAllData(sbuId, "%" + search.trim().toLowerCase() + "%", isActive, page);
-//        return SearchDTO.of(page.getPageNumber(), page.getPageSize(),
-//            pages.getContent().stream().map(a -> modelMapper.map(a, cls)).collect(toList()), // it will display the data. igNore the jsonBackReferences
-////                new ArrayList<>(pages.getContent()), // if have jsonBackReferences it will not display the Header from the details
-//            pages.getTotalElements(),
-//            pages.getTotalPages(), pages.getSize(), pages.getNumber(), pages.isLast());
-//    }
+    public SearchDTO findAllByName(String search, Pageable page, Class<?> cls) {
+        Page<T> pages = (Page<T>) ((R) getRepository()).findAllData("%" + search.trim().toLowerCase() + "%", page);
+        return SearchDTO.of(page.getPageNumber(), page.getPageSize(),
+            pages.getContent().stream().map(a -> modelMapper.map(a, cls)).collect(toList()), // it will display the data. igNore the jsonBackReferences
+//                new ArrayList<>(pages.getContent()), // if have jsonBackReferences it will not display the Header from the details
+            pages.getTotalElements(),
+            pages.getTotalPages(), pages.getSize(), pages.getNumber(), pages.isLast());
+    }
 
     /**
      * default getOne item and convert it to DTO Object base on param
@@ -281,7 +275,8 @@ public abstract class BaseServiceObject<T extends BaseModel, D extends BaseDTO, 
     @Transactional(rollbackFor = Exception.class)
     public void deleteOne(String id) {
         long longId = toId(id);
-        final T one = this.getOne(longId);
+        T entity = this.getOne(longId);
+        getRepository().delete(entity);
     }
 
 }

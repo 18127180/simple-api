@@ -18,6 +18,13 @@ public class MergeFunctions {
         modelMapper.getConfiguration().setPropertyCondition( a -> true);
     }
 
+    public static <A, B> void mergeBaseWithIgnoreNullCondition(A from, B to, ModelMapper modelMapper, boolean ignoreNull) {
+        setModelMapperBaseMerge(modelMapper);
+        modelMapper.getConfiguration().setSkipNullEnabled(ignoreNull);
+        modelMapper.map(from, to);
+        modelMapper.getConfiguration().setPropertyCondition( a -> true);
+    }
+
     /**
      * exclud lise/set in the modelmapper maapping -> should be reset right after use.
      * @param modelMapper

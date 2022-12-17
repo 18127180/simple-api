@@ -37,26 +37,4 @@ public abstract class BaseModel extends Loggable implements Serializable {
     @LastModifiedDate
     private LocalDateTime timeUpdated;
 
-    public String getStringId() {
-        return fromId(this.id);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setId(String id) {
-        //TODO: this is a bit lazy, it might cause an error on tha last line of code on catch
-        // pansamantagal muna.
-        if(id == null || id.isEmpty()) { this.id = null; }
-        else {
-            try {
-                this.id = Long.parseLong(id);
-            } catch (Exception e) {
-                this.id = IdConverter.toId(id);
-            }
-        }
-    }
-
-
 }
