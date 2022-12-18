@@ -11,10 +11,16 @@ The following was discovered as part of building this project:
 
 ### Documentation
 
-* [API documentation in swagger](http://localhost:8080/swagger-ui/#/)
+* [Link to RDBMS database (H2)](http://localhost:8080/h2) (click here)
+
+![image](https://user-images.githubusercontent.com/51233098/208286758-338dbee2-4428-4c71-a511-08426e33ffc8.png)
+
+* [API documentation in swagger](http://localhost:8080/swagger-ui/#/) (click here)
+
 ![image](https://user-images.githubusercontent.com/51233098/208286558-4c12e7ed-4b4b-4860-8909-100bc3cbbddc.png)
 
 * File log will be auto generated when start the project
+
 ![image](https://user-images.githubusercontent.com/51233098/208286595-c7f88f0e-ef49-423d-90cb-68049daec4f2.png)
 
 
