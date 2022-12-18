@@ -11,7 +11,7 @@ The following was discovered as part of building this project:
 
 ### Documentation
 
-* [API documentation in swagger]: (http://localhost:8080/swagger-ui/#/)
+* [API documentation in swagger](http://localhost:8080/swagger-ui/#/)
 * File log will be auto generated when start the project
 
 ### Reference Documentation
