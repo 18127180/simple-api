@@ -15,6 +15,8 @@ The following was discovered as part of building this project:
 ![image](https://user-images.githubusercontent.com/51233098/208286558-4c12e7ed-4b4b-4860-8909-100bc3cbbddc.png)
 
 * File log will be auto generated when start the project
+![image](https://user-images.githubusercontent.com/51233098/208286595-c7f88f0e-ef49-423d-90cb-68049daec4f2.png)
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
