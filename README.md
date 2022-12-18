@@ -12,6 +12,8 @@ The following was discovered as part of building this project:
 ### Documentation
 
 * [API documentation in swagger](http://localhost:8080/swagger-ui/#/)
+![image](https://user-images.githubusercontent.com/51233098/208286558-4c12e7ed-4b4b-4860-8909-100bc3cbbddc.png)
+
 * File log will be auto generated when start the project
 
 ### Reference Documentation
