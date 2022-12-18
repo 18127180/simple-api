@@ -1,5 +1,7 @@
 package com.safetrust.simpleapi.base;
 
+import com.safetrust.simpleapi.exception.ErrorKey;
+import com.safetrust.simpleapi.exception.RestException;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.ParameterizedType;
@@ -49,7 +51,7 @@ public class BaseEntityResolver extends BaseRestController  implements EntityRes
         if (result != null) {
             return result;
         }
-        throw new RuntimeException();
+        throw new RestException( ErrorKey.RECORD_NOT_FOUND, classSimpleName);
     }
 
     /**
@@ -71,7 +73,7 @@ public class BaseEntityResolver extends BaseRestController  implements EntityRes
             return (T) getEntity(((Class<?>) res).getSimpleName(), ((BaseMergable<?>) resource).getId());
         }
         else
-            throw new RuntimeException();
+            throw new RestException( ErrorKey.CLASS_NOT_SUPPORTED, resource.getClass().getSimpleName());
     }
 
     /**

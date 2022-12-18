@@ -48,7 +48,7 @@ public class ContactController extends BaseRestController {
 
     @PutMapping(ID)
     public ResponseEntity<ContactDTO> updateOne(HttpServletRequest request,
-                                                @PathVariable String id, final @RequestBody ContactDTO resource) {
+                                                @PathVariable String id, final @Valid @RequestBody ContactDTO resource) {
         return ResponseEntity.ok(service.updateOneDTO(id, resource));
     }
 

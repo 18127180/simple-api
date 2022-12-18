@@ -12,8 +12,8 @@ public enum ErrorKey {
     /**
      * Generic Access Error Messages
      */
-    VALIDATION_ERROR("validation.rest.error", SC_BAD_REQUEST),
-    VALIDATION_INPUT_ERROR("validation.input.error", SC_BAD_REQUEST);
+    CLASS_NOT_SUPPORTED("dev.class.notSupported", SC_BAD_REQUEST),
+    RECORD_NOT_FOUND("dev.record.notFound", SC_BAD_REQUEST);
 
     /**
      * Holds the message key.

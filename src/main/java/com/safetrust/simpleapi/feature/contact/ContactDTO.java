@@ -12,11 +12,11 @@ import javax.validation.constraints.Pattern;
 @Setter
 public class ContactDTO extends BaseDTO<Contact> {
 
-    @NotNull(message = "Name cannot be null")
+    @NotNull(message = "{dev.validation.name}")
     private String name;
-    @Email(message = "Email should be valid")
+    @Email(message = "{dev.validation.email}")
     private String emailAddress;
-    @Pattern(regexp="(^$|[0-9]{10})")
+    @Pattern(regexp="(^$|[0-9]{10})", message = "{dev.validation.phoneNumber}")
     private String telephoneNumber;
     private String postalAddress;
 
