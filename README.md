@@ -4,10 +4,14 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The JVM level was changed from '1.8' to '17', review the [JDK Version Range](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions#jdk-version-range) on the wiki for more details.
-* The original package name 'com.safetrust.simple-api' is invalid and this project uses 'com.safetrust.simpleapi' instead.
+* The JVM level was changed from '1.8' to '17', review the [JDK Version Range](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions#jdk-version-range) on the wiki for more details. (Addition information by Phuc Le)
+* The original package name 'com.safetrust.simple-api' is invalid and this project uses 'com.safetrust.simpleapi' instead. (Addition information by Phuc Le)
 
 # Getting Started
+
+### Documentation
+
+* [API documentation in swagger: http://localhost:8080/swagger-ui/#/]
 
 ### Reference Documentation
 For further reference, please consider the following sections:
